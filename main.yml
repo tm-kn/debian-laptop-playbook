@@ -1,0 +1,18 @@
+---
+- name: Provision Debian
+  hosts: all
+  roles:
+    - apt
+    - x260
+    - desktop
+    - firefox
+    - development
+    - virtualization
+    - docker
+    - python
+    - vim
+    - node
+    - sudo
+    - bash
+    - git
+    - android_sdk

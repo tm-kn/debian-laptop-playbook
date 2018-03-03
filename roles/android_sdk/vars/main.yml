@@ -1,0 +1,21 @@
+---
+android_home: "{{ ansible_env.HOME}}/Android"
+dot_android_folder: "{{ ansible_env.HOME }}/.android"
+android_sdk_manager: "{{ android_home }}/tools/bin/sdkmanager"
+android_sdk_packages:
+    - platform-tools
+    - tools
+    - build-tools;23.0.0
+    - build-tools;23.0.1
+    - build-tools;23.0.2
+    - build-tools;23.0.3
+    - extras;android;m2repository
+    - extras;google;google_play_services
+    - extras;google;m2repository
+    - platform-tools
+    - platforms;android-23
+    - sources;android-23
+android_sdk_dependencies_packages:
+    - lib32z1
+    - libc6-dev-i386
+    - openjdk-8-jdk

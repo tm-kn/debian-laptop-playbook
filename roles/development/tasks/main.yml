@@ -1,0 +1,56 @@
+---
+- name: install build-essential
+  package:
+    name: build-essential
+    state: latest
+  become: true
+
+- name: install linux-headers-amd64
+  package:
+    name: linux-headers-amd64
+    state: latest
+  become: true
+
+- name: install git
+  package:
+    name: git
+    state: latest
+    default_release: stretch-backports
+  become: true
+
+- name: install pkg-config
+  package:
+    name: pkg-config
+    state: latest
+  become: true
+
+- name: install ansible
+  apt:
+    name: ansible
+    state: latest
+    default_release: stretch-backports
+  become: true
+
+- name: install fabric
+  package:
+    name: fabric
+    state: latest
+  become: true
+
+- name: install wget
+  package:
+    name: wget
+    state: latest
+  become: true
+
+- name: install curl
+  package:
+    name: curl
+    state: latest
+  become: true
+
+- name: install httpie
+  package:
+    name: httpie
+    state: latest
+  become: true

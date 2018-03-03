@@ -1,0 +1,41 @@
+---
+- name: install gstreamer plugins
+  package:
+    name: {{ item }}
+    state: present
+  become: true
+  with_items:
+    - gstreamer1.0-plugins-bad
+    - gstreamer1.0-plugins-ugly-free
+    - gstreamer1.0-plugins-ugly-nonfree
+    - gstreamer1.0-libav
+
+- name: install vlc
+  package:
+    name: vlc
+    state: present
+  become: true
+
+- name: install quod libet
+  package:
+    name: quodlibet
+    state: present
+  become: true
+
+- name: uninstall rhythmbox
+  package:
+    name: rhythmbox
+    state: absent
+  become: true
+
+- name: install handbrake
+  package:
+    name: handbrake
+    state: latest
+  become: true
+
+- name: install simplescreenrecorder
+  package:
+    name: simplescreenrecorder
+    state: latest
+  become: true

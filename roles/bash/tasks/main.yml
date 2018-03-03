@@ -1,0 +1,21 @@
+---
+- name: add ps1 to .bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} - PS1 - ANSIBLE MANAGED BLOCK"
+    block: |
+      __PARSE_GIT_BRANCH_CMD='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\ \⚡\ \\\\\1\\ \/`'
+
+      cat="\[\033[40;1m\] 🐱 \[\033[0m\]"
+      dir="\[\033[46;97;1m\] 📁 "'\W '
+      git_branch="\[\033[0m\]\[\033[106;97;1m\]$__PARSE_GIT_BRANCH_CMD\[\033[0m\]"
+
+      export PS1=$cat$dir$git_branch"\[\033[40;97;1m\]"' \$ '"\[\033[0m\] "
+
+- name: add ps1 to root's .bashrc
+  blockinfile:
+    path: "/root/.bashrc"
+    marker: "# {mark} - PS1 - ANSIBLE MANAGED BLOCK"
+    block: |
+      PS1='\[\033[1;31m\][🐶\u@\h \W]\$\[\033[0m\] '
+  become: true

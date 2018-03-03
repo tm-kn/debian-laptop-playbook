@@ -1,0 +1,13 @@
+---
+- name: install firefox
+  apt:
+    name: firefox
+    default_release: sid
+    state: latest
+  become: true
+
+- name: remove firefox-esr
+  package:
+    name: firefox-esr
+    state: absent
+  become: true

@@ -1,0 +1,45 @@
+---
+- name: download nvm installation script
+  get_url:
+    force: true
+    url: https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_version }}/install.sh
+    dest: /tmp/nvm_install.sh
+  register: nvm_installation_script
+
+- name: install nvm
+  shell: >
+    bash {{ nvm_installation_script.dest }}
+    creates={{ ansible_env.HOME }}/.nvm/nvm.sh
+
+- name: install node via nvm
+  shell: >
+    bash -c "source ~/.nvm/nvm.sh && nvm install {{ default_node_version }} && nvm alias default {{ default_node_version }}"
+    creates={{ ansible_env.HOME }}/.nvm/alias
+
+- name: add yarn repository key
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+  become: true
+
+- name: install apt-transport-https
+  package:
+    name: apt-transport-https
+    state: latest
+  become: true
+
+- name: add yarn repository
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
+    filename: yarn
+  become: true
+
+- name: install yarn
+  apt:
+    # We do not want APT to install system-wide Node since we use NVM
+    install_recommends: false
+    name: yarn
+    update_cache: true
+    state: latest
+  become: true

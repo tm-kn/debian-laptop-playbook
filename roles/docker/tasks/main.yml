@@ -1,0 +1,82 @@
+---
+- name: add apt-transport-https
+  package:
+    name: apt-transport-https
+    state: latest
+  become: true
+
+- name: add docker repository key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+  become: true
+
+- name: add docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+    state: present
+    filename: docker
+  become: true
+
+- name: install docker-ce
+  package:
+    name: docker-ce
+    state: latest
+  become: true
+
+# Debian has docker-compose in its repositories, but it's too outdated.
+- name: install docker-compose
+  get_url:
+    url: >
+      https://github.com/docker/compose/releases/download/{{ compose_version }}/docker-compose-Linux-x86_64
+    force: true
+    group: root
+    owner: root
+    mode: 0755
+    dest: /usr/local/bin/docker-compose
+  become: true
+
+- name: install docker-compose bash completion
+  get_url:
+    url: >
+      https://raw.githubusercontent.com/docker/compose/{{ compose_version }}/contrib/completion/bash/docker-compose
+    force: true
+    group: root
+    owner: root
+    mode: 0644
+    dest: /usr/share/bash-completion/completions/docker-compose
+  become: true
+
+- name: install docker-machine
+  get_url:
+    url: >
+      https://github.com/docker/machine/releases/download/v{{ machine_version }}/docker-machine-Linux-x86_64
+    force: true
+    group: root
+    owner: root
+    mode: 0755
+    dest: /usr/local/bin/docker-machine
+  become: true
+
+- name: install docker-machine bash completion
+  get_url:
+    url: >
+      https://raw.githubusercontent.com/docker/machine/v{{ machine_version }}/contrib/completion/bash/docker-machine.bash
+    force: true
+    group: root
+    owner: root
+    mode: 0644
+    dest: /usr/share/bash-completion/completions/docker-machine
+  become: true
+
+- name: add docker-machine helper to .bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} - DOCKER-MACHINE - ANSIBLE MANAGED BLOCK"
+    block: |
+      if [[ $(docker-machine status default) == "Running" ]]
+      then
+          printf " 🐋 Docker Machine environment for machine \"default\" set in this terminal.\n"
+          eval "$(docker-machine env default)"
+      fi
+

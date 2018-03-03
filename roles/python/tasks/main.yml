@@ -1,0 +1,54 @@
+---
+- name: install python3
+  package:
+    name: python3
+    state: latest
+  become: true
+
+- name: install python3-pip
+  package:
+    name: python3-pip
+    state: latest
+  become: true
+
+- name: install python3-dev
+  package:
+    name: python3-dev
+    state: latest
+  become: true
+
+- name: install python3-venv
+  package:
+    name: python3-venv
+    state: latest
+  become: true
+
+- name: install python linters
+  package:
+    name: python3-flake8
+    state: latest
+  become: true
+
+- name: install tox
+  package:
+    name: tox
+    state: latest
+  become: true
+
+- name: install twine
+  package:
+    name: twine
+    state: latest
+  become: true
+
+- name: install python
+  package:
+    name: python
+    state: latest
+  become: true
+
+- name: install python-dev
+  package:
+    name: python-dev
+    state: latest
+  become: true

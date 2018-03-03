@@ -1,0 +1,32 @@
+---
+- name: install git
+  apt:
+    name: git
+    default_release: stretch-backports
+    state: latest
+  become: true
+
+- name: create .gitconfig
+  copy:
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    content: |
+      [includeIf "gitdir:~/"]
+      path = .gitconfig_personal
+      [includeIf "gitdir:~/Torchbox/"]
+      path = .gitconfig_torchbox
+
+- name: create .gitconfig_personal
+  copy:
+    dest: "{{ ansible_env.HOME }}/.gitconfig_personal"
+    content: |
+      [user]
+      name = Tomasz Knapik
+      email = tmkn@tmkn.uk
+
+- name: create .gitconfig_torchbox
+  copy:
+    dest: "{{ ansible_env.HOME }}/.gitconfig_torchbox"
+    content: |
+      [user]
+      name = Tomasz Knapik
+      email = tomasz.knapik@torchbox.com

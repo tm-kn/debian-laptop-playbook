@@ -1,0 +1,9 @@
+---
+- name: enable sudo insults
+  copy:
+    content: |
+      Defaults insults
+    dest: /etc/sudoers.d/insults
+    validate: 'visudo -cf %s'
+    mode: 0440
+  become: true

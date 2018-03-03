@@ -1,0 +1,88 @@
+---
+- name: install time tracker
+  package:
+    name: hamster-applet
+    state: latest
+  become: true
+
+- name: install darktable
+  package:
+    name: darktable
+    state: latest
+  become: true
+
+- name: install GIMP
+  package:
+    name: gimp
+    state: latest
+  become: true
+
+- name: install Inkscape
+  package:
+    name: inkscape
+    state: latest
+  become: true
+
+- name: install owncloud
+  package:
+    name: "{{ item }}"
+    state: latest
+    default_release: stretch-backports
+  become: true
+  with_items:
+    - nautilus-owncloud
+    - owncloud-client
+
+- name: install top-icons-plus
+  package:
+    name: gnome-shell-extension-top-icons-plus
+    state: latest
+  become: true
+
+- name: remove gnome-games
+  package:
+    name: gnome-games
+    state: absent
+  become: true
+
+- name: remove shotwell
+  package:
+    name: shotwell
+    state: absent
+  become: true
+
+- name: remove gnome-documents
+  package:
+    name: gnome-documents
+    state: absent
+  become: true
+
+- name: remove gnome-maps
+  package:
+    name: gnome-maps
+    state: absent
+  become: true
+
+- name: disable cups-browsed
+  service:
+    name: cups-browsed
+    enabled: false
+    state: stopped
+  become: true
+
+- name: install chromium
+  package:
+    name: chromium
+    state: present
+  become: true
+
+- name: install zoom.us meeting client
+  apt:
+    deb: https://zoom.us/client/latest/zoom_amd64.deb
+  become: true
+
+- name: install tor browser
+  package:
+    name: torbrowser-launcher
+    state: present
+  become: true

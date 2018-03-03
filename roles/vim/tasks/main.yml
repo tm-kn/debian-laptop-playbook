@@ -1,0 +1,41 @@
+---
+- name: install vim
+  package:
+    name: vim
+    state: latest
+  become: true
+
+- name: install vim-gtk
+  package:
+    name: vim-gtk
+    state: latest
+  become: true
+
+- name: download .vimrc
+  get_url:
+    url: https://raw.githubusercontent.com/tm-kn/.vimrc/master/.vimrc
+    force: true
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+
+- name: download vundle
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: "{{ ansible_env.HOME }}/.vim/bundle/Vundle.vim"
+
+- name: install vim plugins using vundle
+  command: vim +BundleInstall +qall
+
+- name: set VIM as default system editor
+  alternatives:
+    name: editor
+    path: /usr/bin/vim.gtk
+  become: true
+
+- name: install cmake as YouCompleteMe build dependency
+  package:
+    name: cmake
+    state: latest
+  become: true
+
+- name: compile YouCompleteMe plugin
+  command: "python {{ ansible_env.HOME }}/.vim/bundle/YouCompleteMe/install.py"

@@ -1,0 +1,45 @@
+---
+- name: add stretch-backports repository
+  apt_repository:
+    repo: deb http://deb.debian.org/debian/ stretch-backports main contrib non-free
+    state: present
+  become: true
+
+- name: add sid repository
+  apt_repository:
+    repo: deb http://deb.debian.org/debian/ sid main contrib non-free
+    state: present
+  become: true
+
+- name: pin sid repository
+  copy:
+    content: |
+      Package: *
+      Pin: release a=unstable
+      Pin-Priority: -10
+    dest: "/etc/apt/preferences.d/sid"
+  become: true
+
+- name: apt update
+  apt:
+    update_cache: true
+  become: true
+
+- name: install aptitude
+  package:
+    name: aptitude
+    state: latest
+  become: true
+
+- name: apt upgrade
+  apt:
+    upgrade: true
+  become: true
+
+# TODO: Test why it fails
+#- name: apt autoremove
+  #apt:
+    #autoremove: true
+  #become: true
+
+

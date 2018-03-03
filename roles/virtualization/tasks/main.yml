@@ -1,0 +1,31 @@
+---
+- name: install linux-headers-amd64
+  package:
+    name: linux-headers-amd64
+    state: latest
+  become: true
+
+- name: install build-essential
+  package:
+    name: build-essential
+    state: latest
+  become: true
+
+- name: install virtualbox
+  package:
+    name: virtualbox
+    state: latest
+  become: true
+
+- name: install vagrant
+  package:
+    name: vagrant
+    state: latest
+  become: true
+
+- name: add user to vboxusers group
+  user:
+    name: "{{ ansible_env.USER }}"
+    append: true
+    groups: vboxusers
+  become: true
