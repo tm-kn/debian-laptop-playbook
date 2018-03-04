@@ -116,3 +116,33 @@
     name: network-manager-openvpn-gnome
     state: latest
   become: true
+
+- name: install sl
+  package:
+    name: sl
+    state: latest
+  become: true
+
+- name: install fortunes
+  package:
+    name: fortunes
+    state: latest
+  become: true
+
+- name: install cowsay
+  package:
+    name: cowsay
+    state: latest
+  become: true
+
+- name: install screenfetch
+  package:
+    name: screenfetch
+    state: latest
+  become: true
+
+- name: install htop
+  package:
+    name: htop
+    state: latest
+  become: true
