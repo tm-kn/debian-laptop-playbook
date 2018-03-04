@@ -54,3 +54,9 @@
     name: httpie
     state: latest
   become: true
+
+- name: install libssl-dev
+  package:
+    name: libssl-dev
+    state: latest
+  become: true

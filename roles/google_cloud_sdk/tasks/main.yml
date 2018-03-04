@@ -1,0 +1,30 @@
+---
+- name: install apt-transport-https
+  package:
+    name: apt-transport-https
+    state: latest
+  become: true
+
+- name: add google cloud platform repository public key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  become: true
+
+- name: add google cloud platform repository
+  apt_repository:
+    repo: deb http://packages.cloud.google.com/apt cloud-sdk-stretch main
+    state: present
+    filename: google_cloud
+  become: true
+
+- name: install google cloud sdk
+  package:
+    name: google-cloud-sdk
+    state: latest
+  become: true
+
+- name: install kubectl
+  package:
+    name: kubectl
+    state: latest
+  become: true

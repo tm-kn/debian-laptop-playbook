@@ -18,3 +18,4 @@
     - bash
     - git
     - android_sdk
+    - google_cloud_sdk
