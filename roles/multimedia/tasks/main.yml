@@ -1,25 +1,31 @@
 ---
 - name: install gstreamer plugins
   package:
-    name: {{ item }}
-    state: present
+    name: "{{ item }}"
+    state: latest
   become: true
   with_items:
     - gstreamer1.0-plugins-bad
-    - gstreamer1.0-plugins-ugly-free
-    - gstreamer1.0-plugins-ugly-nonfree
+    - gstreamer1.0-plugins-ugly
+    - gstreamer1.0-plugins-ugly
     - gstreamer1.0-libav
 
 - name: install vlc
   package:
     name: vlc
-    state: present
+    state: latest
   become: true
 
 - name: install quod libet
   package:
     name: quodlibet
-    state: present
+    state: latest
+  become: true
+
+- name: install easytag
+  package:
+    name: easytag
+    state: latest
   become: true
 
 - name: uninstall rhythmbox
