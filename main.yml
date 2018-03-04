@@ -3,6 +3,7 @@
   hosts: all
   roles:
     - apt
+    - kernel
     - x260
     - desktop
     - multimedia

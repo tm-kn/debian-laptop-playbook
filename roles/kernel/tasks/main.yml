@@ -1,0 +1,10 @@
+---
+- name: install linux kernel from stretch-backports
+  apt:
+    name: "{{ item }}"
+    default_release: stretch-backports
+    state: latest
+  with_items:
+    - linux-image-amd64
+    - linux-headers-amd64
+  become: true
