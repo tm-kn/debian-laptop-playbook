@@ -110,3 +110,9 @@
     name: evolution-ews
     state: latest
   become: true
+
+- name: install network-manager-openvpn-gnome
+  package:
+    name: network-manager-openvpn-gnome
+    state: latest
+  become: true
