@@ -29,3 +29,12 @@
     append: true
     groups: vboxusers
   become: true
+
+# Vagrant changed the URL the boxes are at and Debian still has an old version
+# of Vagrant without updated URL, therefore need to set it manually.
+- name: set default vagrant server
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} - VAGRANT - ANSIBLE MANAGED BLOCK"
+    block: |
+      VAGRANT_SERVER_URL=https://vagrantcloud.com
