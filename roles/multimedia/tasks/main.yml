@@ -34,6 +34,12 @@
     state: absent
   become: true
 
+- name: uninstall gnome-music
+  package:
+    name: gnome-music
+    state: absent
+  become: true
+
 - name: install handbrake
   package:
     name: handbrake

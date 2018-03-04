@@ -1,39 +1,41 @@
 ---
-- name: "Install Android SDK dependencies"
+- name: install android sdk dependencies
   package:
-      name: "{{ item }}"
-      state: present
-  with_list: "{{ android_sdk_dependencies_packages }}"
+    name: "{{ item }}"
+    state: present
   become: true
+  with_items:
+    - lib32z1
+    - libc6-dev-i386
+    - openjdk-8-jdk
 
-- name: "Create Android SDK directory in {{ android_home }}"
+- name: create android sdk directory in {{ android_home }}
   file:
     path: "{{ android_home }}"
     state: directory
 
-- name: "Create directory {{ dot_android_folder }}"
+- name: create directory {{ dot_android_folder }}
   file:
       path: "{{ dot_android_folder }}"
       state: directory
 
-- name: "Create {{ dot_android_folder }}/repositories.cfg"
-  copy:
-      content: ""
-      dest: "{{ dot_android_folder }}/repositories.cfg"
-      force: no
+- name: create {{ dot_android_folder }}/repositories.cfg"
+  file:
+      state: touch
+      path: "{{ dot_android_folder }}/repositories.cfg"
 
-- name: "Check {{ android_home }} contents"
-  command: "ls {{ android_home }}"
+- name: check {{ android_home }} contents
+  command: ls {{ android_home }}
   register: contents
 
-- name: "Download Android SDK and extract to {{ android_home }}"
+- name: download android sdk and extract to {{ android_home }}
   unarchive:
-      src: "https://dl.google.com/android/repository/tools_r25.2.4-linux.zip"
+      src: https://dl.google.com/android/repository/tools_r25.2.4-linux.zip
       dest: "{{ android_home }}/"
       remote_src: true
   when: contents.stdout == ""
 
-- name: Append Android configuration to user's .bashrc
+- name: append android sdk configuration to user's .bashrc
   blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     marker: "# {mark} - ANDROID SDK - ANSIBLE MANAGED BLOCK"

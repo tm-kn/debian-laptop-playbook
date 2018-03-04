@@ -18,3 +18,37 @@
     content: options iwlwifi bt_coex_active=0
     dest: /etc/modprobe.d/iwlwifi.conf
   become: true
+
+# Bug in GDM preventing Bluetooth audio to work
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=805414
+- name: disable claiming a2dp by gdm
+  file:
+    path: /var/lib/gdm3/.config/systemd/user/sockets.target.wants/pulseaudio.socket
+    state: absent
+  become: true
+  when:  ansible_distribution == "Debian" and
+         ansible_distribution_major_version == "9"
+
+- name: disable spawning pulse by gdm
+  copy:
+    dest: /var/lib/gdm3/.config/pulse/client.conf
+    force: yes
+    owner: Debian-gdm
+    group: Debian-gdm
+    content: |
+      autospawn = no
+      daemon-binary = /bin/true
+  become: true
+  when:  ansible_distribution == "Debian" and
+          ansible_distribution_major_version == "9"
+
+- name: enable auto-connect for some a2dp devices
+  blockinfile:
+    path: /etc/pulse/default.pa
+    marker: "# {mark} - PULSEAUDIO - ANSIBLE MANAGED"
+    block: |
+      # enable auto connect for some a2dp devices
+      load-module module-switch-on-connect
+  become: true
+  when:  ansible_distribution == "Debian" and
+          ansible_distribution_major_version == "9"
