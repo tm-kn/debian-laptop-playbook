@@ -6,9 +6,10 @@
   become: true
 
 - name: install darktable
-  package:
+  apt:
     name: darktable
     state: latest
+    default_release: stretch-backports
   become: true
 
 - name: install GIMP
