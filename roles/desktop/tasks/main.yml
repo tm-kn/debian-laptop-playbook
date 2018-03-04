@@ -73,7 +73,7 @@
 - name: install chromium
   package:
     name: chromium
-    state: present
+    state: latest
   become: true
 
 - name: install zoom.us meeting client
@@ -84,5 +84,23 @@
 - name: install tor browser
   package:
     name: torbrowser-launcher
-    state: present
+    state: latest
   become: true
+
+- name: install emoji font
+  package:
+    name: fonts-symbola
+    state: latest
+  become: true
+
+- name: install east asian fonts
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: true
+  with_items:
+    - fonts-arphic-ukai
+    - fonts-arphic-uming
+    - fonts-ipafont-mincho
+    - fonts-ipafont-gothic
+    - fonts-unfonts-core

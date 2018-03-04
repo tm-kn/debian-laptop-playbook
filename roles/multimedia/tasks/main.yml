@@ -39,3 +39,9 @@
     name: simplescreenrecorder
     state: latest
   become: true
+
+- name: install kdenlive
+  package:
+    name: kdenlive
+    state: latest
+  become: true
