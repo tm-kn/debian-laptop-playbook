@@ -104,3 +104,9 @@
     - fonts-ipafont-mincho
     - fonts-ipafont-gothic
     - fonts-unfonts-core
+
+- name: install evolution-ews
+  package:
+    name: evolution-ews
+    state: latest
+  become: true
