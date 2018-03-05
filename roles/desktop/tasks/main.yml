@@ -12,13 +12,19 @@
     default_release: stretch-backports
   become: true
 
-- name: install GIMP
+- name: install gimp
   package:
     name: gimp
     state: latest
   become: true
 
-- name: install Inkscape
+- name: install keepassx
+  package:
+    name: keepassx
+    state: latest
+  become: true
+
+- name: install inkscape
   package:
     name: inkscape
     state: latest
