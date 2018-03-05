@@ -58,17 +58,3 @@
     name: python-dev
     state: latest
   become: true
-
-# for things installed with pip install --user
-- name: add local bin directory to path
-  blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    marker: "# {mark} - PIP USER BIN PATH - ANSIBLE MANAGED BLOCK"
-    block: |
-      export PATH=~/.local/bin:$PATH
-
-- name: install awscli from pip
-  pip:
-    name: awscli
-    state: latest
-    extra_args: --user

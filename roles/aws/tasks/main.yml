@@ -1,0 +1,12 @@
+---
+- name: download awscli
+  unarchive:
+    src: https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
+    dest: /tmp/
+    remote_src: yes
+  register: awscli_bundle_dir
+
+- name: install awscli
+  command: >
+    {{ awscli_bundle_dir.dest }}/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+  become: true

@@ -39,3 +39,9 @@
 
 - name: compile YouCompleteMe plugin
   command: "python {{ ansible_env.HOME }}/.vim/bundle/YouCompleteMe/install.py"
+
+- name: install silver searcher
+  package:
+    name: silversearcher-ag
+    state: latest
+  become: true

@@ -30,7 +30,7 @@
     url: >
       https://github.com/docker/compose/releases/download/{{ compose_version }}/docker-compose-Linux-x86_64
     force: true
-    group: root
+    group: staff
     owner: root
     mode: 0755
     dest: /usr/local/bin/docker-compose
@@ -52,7 +52,7 @@
     url: >
       https://github.com/docker/machine/releases/download/v{{ machine_version }}/docker-machine-Linux-x86_64
     force: true
-    group: root
+    group: staff
     owner: root
     mode: 0755
     dest: /usr/local/bin/docker-machine
