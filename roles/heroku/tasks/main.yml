@@ -1,0 +1,19 @@
+---
+- name: add heroku repository key
+  apt_key:
+    url: https://cli-assets.heroku.com/apt/release.key
+    state: present
+  become: true
+
+- name: add heroku repository
+  apt_repository:
+    repo: "deb https://cli-assets.heroku.com/branches/stable/apt ./"
+    state: present
+    filename: heroku
+  become: true
+
+- name: install heroku
+  package:
+    name: heroku
+    state: latest
+  become: true
