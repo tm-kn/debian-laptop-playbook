@@ -76,7 +76,7 @@
     block: |
       if [[ $(docker-machine status default) == "Running" ]]
       then
-          printf " 🐋 Docker Machine environment for machine \"default\" set in this terminal.\n"
+          printf " 🐋 Docker Machine environment for machine \"default\" ($(docker-machine ip)) set in this terminal.\n"
           eval "$(docker-machine env default)"
       fi
 
