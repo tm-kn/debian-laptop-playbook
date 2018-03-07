@@ -37,4 +37,4 @@
     path: "{{ ansible_env.HOME }}/.bashrc"
     marker: "# {mark} - VAGRANT - ANSIBLE MANAGED BLOCK"
     block: |
-      VAGRANT_SERVER_URL=https://vagrantcloud.com
+      export VAGRANT_SERVER_URL=https://vagrantcloud.com
