@@ -124,6 +124,18 @@
     state: latest
   become: true
 
+- name: install network-manager-openconnect-gnome
+  package:
+    name: network-manager-openconnect-gnome
+    state: latest
+  become: true
+
+- name: install rsync
+  package:
+    name: rsync
+    state: latest
+  become: true
+
 - name: install sl
   package:
     name: sl
