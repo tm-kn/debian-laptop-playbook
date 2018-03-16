@@ -32,8 +32,10 @@
 
 # Vagrant changed the URL the boxes are at and Debian still has an old version
 # of Vagrant without updated URL, therefore need to set it manually.
-- name: set default vagrant server
+- name: delete old setting of default vagrant server
   blockinfile:
+    # It's been fixed on Debian repos, therefore set to "absent".
+    state: absent
     path: "{{ ansible_env.HOME }}/.bashrc"
     marker: "# {mark} - VAGRANT - ANSIBLE MANAGED BLOCK"
     block: |
