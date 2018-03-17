@@ -4,6 +4,7 @@
   roles:
     - apt
     - kernel
+    - firewall
     - x260
     - desktop
     - multimedia

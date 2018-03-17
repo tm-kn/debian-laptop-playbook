@@ -1,0 +1,20 @@
+---
+- name: install ufw
+  package:
+    name: ufw
+    state: latest
+  become: true
+
+- name: deny incoming traffic
+  ufw:
+    direction: incoming
+    policy: deny
+    state: enabled
+  become: true
+
+- name: allow outgoing traffic
+  ufw:
+    direction: outgoing
+    policy: allow
+    state: enabled
+  become: true
