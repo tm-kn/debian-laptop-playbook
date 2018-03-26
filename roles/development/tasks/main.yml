@@ -60,3 +60,9 @@
     name: libssl-dev
     state: latest
   become: true
+
+- name: install cookiecutter
+  package:
+    name: cookiecutter
+    state: latest
+  become: true
