@@ -45,3 +45,9 @@
     name: silversearcher-ag
     state: latest
   become: true
+
+- name: install ctags
+  package:
+    name: exuberant-ctags
+    state: latest
+  become: true
