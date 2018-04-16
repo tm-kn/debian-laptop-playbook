@@ -7,4 +7,5 @@
   with_items:
     - linux-image-amd64
     - linux-headers-amd64
+    - linux-compiler-gcc-6-x86
   become: true
